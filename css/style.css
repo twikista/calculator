@@ -1,3 +1,4 @@
+/*General styling*/
 *{
     padding: 0;
     margin: 0;
@@ -31,10 +32,75 @@ body{
     justify-content: center;
 }
 
+
+
 .calculator-container{
     background-color: rgb(255, 255, 255);
     border-radius: 0.6rem;
     width: 100%;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 1px 5px rgba(0, 0, 0, 0.5);
     position: relative;  
+}
+
+/*calcularot header*/
+header{
+    border-bottom:rgb(226, 226, 226) 1px solid ;
+    width: 100%;
+    padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.history{
+    padding-top: 0.2rem;
+    padding-bottom: 0.5rem;
+    justify-content: flex-end;
+    margin: 0;
+    width: inherit;
+
+}
+
+.history-btn{
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+    z-index: 99;
+}
+
+.history-btn:hover{
+    background-color: transparent;
+}
+
+/*calculator screen section*/
+.calculator-screen{
+   
+    width: inherit;
+    font-family: 'Gemunu Libre', sans-serif;
+    font-weight: 600;
+    height: 80px;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+    padding-top: 0.5rem;
+}
+
+.screen-top-row, .screen-bottom-row{
+    justify-content: flex-end;
+    align-items: center;
+    width: inherit;
+}
+
+.screen-top-row{
+    font-size: 1.2rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    color: rgba(136, 136, 136, 0.8);   
+}
+
+.display-operator{
+    padding-right: 3px;
+    padding-left: 3px;
+    display: inline-block;   
+}
+
+.screen-bottom-row{
+    font-size: 2rem;
+    padding: 0.75rem 0.5rem 0.75rem 0.5rem;
+    color: rgb(129, 129, 129);
 }
