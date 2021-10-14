@@ -104,3 +104,68 @@ header{
     padding: 0.75rem 0.5rem 0.75rem 0.5rem;
     color: rgb(129, 129, 129);
 }
+
+/*styling for calculator keys*/
+.calculator-keys{
+    width: inherit;
+    font-size: 1.6rem;
+    background-color: rgb(226, 226, 226);
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;   
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    grid-gap: 1px;    
+}
+
+button{
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    padding: 20px 3px;
+    cursor: pointer;
+    display: inline-block;
+    color: rgb(109, 109, 109);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;    
+}
+
+button:hover{
+    background-color: rgb(240, 240, 240); 
+}
+
+.equals-key{
+    background-color: rgb(230, 230, 230);
+}
+
+/* button .operator-key{
+    color: rgb(255, 130, 130);
+} */
+
+button:nth-child(17){
+    border-bottom-left-radius: 0.6rem;
+}
+
+button:nth-child(20){
+    border-bottom-right-radius: 0.6rem; 
+}
+
+.fas{
+    color: rgb(136, 136, 136);
+    font-size: 1.4rem;
+}
+
+.material-icons-outlined.history-icon{
+    color: rgb(190, 190, 190);
+    font-size: 1.3rem;
+}
+
+.material-icons-outlined.history-icon:hover{
+    color: rgb(120, 120, 120);
+    font-size: 1.2rem;
+}
