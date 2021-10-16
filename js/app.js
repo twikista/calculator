@@ -1,4 +1,4 @@
-//functions for diffrent operations
+//functions to handle diffrent operations
 //add function
 function add(a, b) {
   const sum = parseFloat(a) + parseFloat(b);
@@ -45,6 +45,34 @@ function exponent(a, b) {
   return exponential;
 }
 
+//operate funtion
+function operate(valueOne, operation, ValueTwo) {
+  let answer = null;
+  switch (operation) {
+    case "+":
+      answer = add(valueOne, ValueTwo);
+      break;
+    case "-":
+      answer = subtract(valueOne, ValueTwo);
+      break;
+    case "x":
+      answer = multiply(valueOne, ValueTwo);
+      break;
+    case "/":
+      answer = divide(valueOne, ValueTwo);
+      break;
+    case "%":
+      answer = percent(valueOne, ValueTwo);
+      break;
+    case "^":
+      answer = exponent(valueOne, ValueTwo);
+      break;
+  }
+
+  console.log(answer);
+  return Number(answer);
+}
+
 //function calculator() {
 let operandOne = "";
 let operandTwo = "";
@@ -68,17 +96,20 @@ document.addEventListener("keyup", (e) => {
 
       console.log(target);
       operator = target;
-
       currentOperand = "";
-
       calculatorScreenDisplay(target, operator);
       return target;
     } else if (target === key.dataset.equalskey) {
+      const equalsKey = key.dataset.equalskey;
+      solution = operate(operandOne, operator, operandTwo);
+      calculatorScreenDisplay(target, operator, equalsKey);
+      console.log(solution);
+      currentOperand = "";
     }
   });
 });
 
-function calculatorScreenDisplay(pressedKey, operate) {
+function calculatorScreenDisplay(pressedKey, operate, equals) {
   let screenTopRow = document.querySelector(".screen-top-row");
   let screenBottomRow = document.querySelector(".screen-bottom-row");
   screenTopRow.textContent += pressedKey;
@@ -87,6 +118,9 @@ function calculatorScreenDisplay(pressedKey, operate) {
   if (pressedKey === operate) {
     screenBottomRow.textContent = "";
     currentOperand = "";
+  } else if (pressedKey === equals) {
+    screenBottomRow.textContent = solution;
+    screenTopRow.textContent = `${operandOne} ${operate} ${operandTwo}`;
   }
   console.log(screenTopRow.textContent);
 }
