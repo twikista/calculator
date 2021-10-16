@@ -112,15 +112,24 @@ document.addEventListener("keyup", (e) => {
 function calculatorScreenDisplay(pressedKey, operate, equals) {
   let screenTopRow = document.querySelector(".screen-top-row");
   let screenBottomRow = document.querySelector(".screen-bottom-row");
+  if (operandOne === "" && operandTwo === "" && solution !== "") {
+    screenTopRow.textContent = "";
+    solution = "";
+  }
   screenTopRow.textContent += pressedKey;
   currentOperand += pressedKey;
   screenBottomRow.textContent = currentOperand;
+
   if (pressedKey === operate) {
     screenBottomRow.textContent = "";
     currentOperand = "";
   } else if (pressedKey === equals) {
     screenBottomRow.textContent = solution;
     screenTopRow.textContent = `${operandOne} ${operate} ${operandTwo}`;
+    arr.length = 0;
+    operandOne = "";
+    operandTwo = "";
+    currentOperand = "";
   }
   console.log(screenTopRow.textContent);
 }
@@ -145,5 +154,13 @@ function setOperandOneValue(pressedKey, presedValues) {
     console.log(presedValues);
   }
 }
+
+function setSolutuion() {
+  if (operandOne === "" && operandTwo === "" && solution !== "") {
+    solution = "";
+  }
+}
+
+setSolutuion();
 
 //calculator();
