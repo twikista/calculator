@@ -89,4 +89,74 @@ function calculator() {
   const keys = document.querySelector(".number-keys");
 
   //event listener that handles calculator functionality
+  keys.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.classList.contains("number-key")) {
+      //clear calculator screen and solution if a number key is pressed
+      if (firstOperand === "" && secondOperand === "" && solution !== "") {
+        screenTopRow.textContent = "";
+        solution = "";
+      }
+
+      //save pressed key
+      pressedKey = target.dataset.numberkey;
+
+      //display entered expression on top tow of calculator screen
+      screenTopRow.textContent += pressedKey;
+      //set and display current operand on bottom row of calculator screen
+      currentOperand += pressedKey;
+      screenBottomRow.textContent = currentOperand;
+
+      //set the value of second operand if first operand is already set
+      secondOperand = +currentOperand;
+      //insert toogle function here
+      //keep second operand unset till value of firstv operand is set
+      if (firstOperand === "") {
+        secondOperand = "";
+      }
+      //use this for backspacing
+      if (firstOperand !== "" && operator === "") {
+        firstOperand += pressedKey;
+        secondOperand = "";
+        screenBottomRow.textContent = firstOperand;
+      }
+    } else if (target.classList.contains("operator-key")) {
+      // set the value of the second operand start of  calculator
+      if (firstOperand === "" && secondOperand === "" && solution === "") {
+        arr.push(+currentOperand);
+        firstOperand = arr[0];
+        //set value of  first operand to solution if an operator is selected after
+        //initial expression has been evaluated using equals key
+      } else if (
+        firstOperand === "" &&
+        secondOperand === "" &&
+        solution !== ""
+      ) {
+        arr.length = 0;
+        arr.push(solution);
+        firstOperand = arr[0];
+        screenTopRow.textContent = `${solution}`;
+        screenBottomRow.textContent = solution;
+        secondOperand = "";
+        operator = "";
+        //evaluates initial expresssion and sets first operand to solution if
+        //an operator is selected after value of second operand has been set
+      } else if (firstOperand !== "" && secondOperand !== "") {
+        solution = operate(firstOperand, operator, secondOperand);
+        arr.length = 0;
+        arr.push(solution);
+        firstOperand = arr[0];
+        screenTopRow.textContent = `${solution}`;
+        screenBottomRow.textContent = solution;
+        secondOperand = "";
+        operator = "";
+      }
+      currentOperand = "";
+      //set operator and display it to expression on top row of calculator screen
+      operator = target.dataset.functionalkey;
+      screenTopRow.textContent += operator;
+    }
+  });
 }
+
+calculator();
