@@ -109,7 +109,7 @@ function calculator() {
 
       //set the value of second operand if first operand is already set
       secondOperand = +currentOperand;
-      //insert toogle function here
+      toggleOperatorsState(screenTopRow, screenBottomRow);
       //keep second operand unset till value of firstv operand is set
       if (firstOperand === "") {
         secondOperand = "";
@@ -164,6 +164,7 @@ function calculator() {
       secondOperand = "";
     } else if (target.classList.contains("clear-key")) {
       resetCalculator();
+      toggleOperatorsState(screenTopRow, screenBottomRow);
     } else if (target.closest("button").classList.contains("backspace-key")) {
       if (firstOperand !== "" || secondOperand != "") {
         //implements backspacing when top row and bottom row of calculator
@@ -196,6 +197,7 @@ function calculator() {
         currentOperand = splitBottomScreenContent;
         screenBottomRow.textContent = currentOperand;
         screenTopRow.textContent = currentOperand;
+        toggleOperatorsState(screenTopRow, screenBottomRow);
       }
     }
   });
@@ -209,6 +211,33 @@ function calculator() {
     firstOperand = "";
     secondOperand = "";
     arr.length = 0;
+  }
+
+  //toggle state of operators if a value is displayed/not displayed on calculator screen
+  function toggleOperatorsState(displayTop, displayBotom) {
+    const btns = document.querySelectorAll("button");
+    if (displayTop.textContent !== "" && displayBotom.textContent !== "") {
+      btns.forEach((btn) => {
+        if (
+          btn.classList.contains("operator-key") ||
+          btn.classList.contains("equals-key")
+        ) {
+          btn.removeAttribute("disabled");
+        }
+      });
+    } else if (
+      displayTop.textContent === "" &&
+      displayBotom.textContent === ""
+    ) {
+      btns.forEach((btn) => {
+        if (
+          btn.classList.contains("operator-key") ||
+          btn.classList.contains("equals-key")
+        ) {
+          btn.setAttribute("disabled", "");
+        }
+      });
+    }
   }
 }
 
