@@ -155,8 +155,61 @@ function calculator() {
       //set operator and display it to expression on top row of calculator screen
       operator = target.dataset.functionalkey;
       screenTopRow.textContent += operator;
+    } else if (target.classList.contains("equals-key")) {
+      solution = operate(firstOperand, operator, secondOperand);
+      screenBottomRow.textContent = solution;
+      currentOperand = "";
+      arr.length = 0;
+      firstOperand = "";
+      secondOperand = "";
+    } else if (target.classList.contains("clear-key")) {
+      resetCalculator();
+    } else if (target.closest("button").classList.contains("backspace-key")) {
+      if (firstOperand !== "" || secondOperand != "") {
+        //implements backspacing when top row and bottom row of calculator
+        //screen each display a value
+        let splitTopScreenContent = screenTopRow.textContent.split("");
+        splitTopScreenContent.splice(splitTopScreenContent.length - 1, 1);
+        splitTopScreenContent = splitTopScreenContent.join("");
+        screenTopRow.textContent = splitTopScreenContent;
+
+        let splitBottomScreenContent = screenBottomRow.textContent.split("");
+        splitBottomScreenContent.splice(splitBottomScreenContent.length - 1, 1);
+        splitBottomScreenContent = splitBottomScreenContent.join("");
+        currentOperand = splitBottomScreenContent;
+        screenBottomRow.textContent = currentOperand;
+        secondOperand = currentOperand;
+        if (
+          splitBottomScreenContent.length === 0 &&
+          !screenTopRow.textContent.includes("+")
+        ) {
+          firstOperand = splitTopScreenContent;
+          secondOperand = "";
+          operator = "";
+          arr.length = 0;
+        }
+      } else {
+        //implement backspacing when only bottom screen of calculator displays a value
+        let splitBottomScreenContent = screenBottomRow.textContent.split("");
+        splitBottomScreenContent.splice(splitBottomScreenContent.length - 1, 1);
+        splitBottomScreenContent = splitBottomScreenContent.join("");
+        currentOperand = splitBottomScreenContent;
+        screenBottomRow.textContent = currentOperand;
+        screenTopRow.textContent = currentOperand;
+      }
     }
   });
+
+  //function that handles the clear button button
+  function resetCalculator() {
+    screenTopRow.textContent = "";
+    screenBottomRow.textContent = "";
+    currentOperand = "";
+    solution = "";
+    firstOperand = "";
+    secondOperand = "";
+    arr.length = 0;
+  }
 }
 
 calculator();
