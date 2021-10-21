@@ -2,21 +2,18 @@
 //add function
 function add(a, b) {
   const sum = parseFloat(a) + parseFloat(b);
-  console.log(sum);
   return sum;
 }
 
 //subtract function
 function subtract(a, b) {
   const difference = parseFloat(a) - parseFloat(b);
-  console.log(difference);
   return difference;
 }
 
 //multiply function
 function multiply(a, b) {
   const times = parseFloat(a) * parseFloat(b);
-  console.log(times);
   return times;
 }
 
@@ -24,7 +21,6 @@ function multiply(a, b) {
 function divide(a, b) {
   if (b === 0) return "Math error";
   const division = parseFloat(a) / parseFloat(b);
-  console.log(division);
   return division;
 }
 
@@ -80,7 +76,6 @@ function operate(valueOne, operation, ValueTwo) {
 
   if (answer.includes(".") && answerLength <= 4) {
     answer = Number(answer);
-    console.log(answer);
     return answer.toFixed(answerLength);
   } else if (answer.includes(".") && answerLength > 4) {
     answer = Number(answer);
@@ -110,7 +105,9 @@ function calculator() {
   keys.addEventListener("click", (e) => {
     const target = e.target;
     if (target.classList.contains("number-key")) {
-      //clear calculator screen and solution if a number key is pressed
+      //clear calculator screen and solution variable if a number is selected
+      //after initial expression has been evaluated using equals key
+
       if (firstOperand === "" && secondOperand === "" && solution !== "") {
         screenTopRow.textContent = "";
         solution = "";
@@ -121,6 +118,7 @@ function calculator() {
 
       //display entered expression on top tow of calculator screen
       screenTopRow.textContent += pressedKey;
+
       //set and display current operand on bottom row of calculator screen
       currentOperand += pressedKey;
       screenBottomRow.textContent = currentOperand;
@@ -128,16 +126,18 @@ function calculator() {
       //set the value of second operand if first operand is already set
       secondOperand = +currentOperand;
       toggleOperatorsState(screenTopRow, screenBottomRow);
-      //keep second operand unset till value of firstv operand is set
+      //keep second operand unset till value of first operand is set
       if (firstOperand === "") {
         secondOperand = "";
       }
-      //use this for backspacing
+      //concatenate presssed value with first operand after expression is backspaced
+      //and first operand is not completely bcakspaced
       if (firstOperand !== "" && operator === "") {
         firstOperand += pressedKey;
         secondOperand = "";
         screenBottomRow.textContent = firstOperand;
       }
+      maxScreenLength(screenTopRow, screenBottomRow);
     } else if (target.classList.contains("operator-key")) {
       // set the value of the second operand start of  calculator
       if (firstOperand === "" && secondOperand === "" && solution === "") {
@@ -258,7 +258,34 @@ function calculator() {
     }
   }
 
-  function maxScreenLength() {}
+  function maxScreenLength(screenTop, screenBottom) {
+    if (
+      screenTop.textContent.length > 20 ||
+      screenBottom.textContent.length > 20
+    ) {
+      displayWaringModal();
+      removeWarningModal();
+      screenTop.textContent = "";
+      screenBottom.textContent = "";
+      // const splitTop = screenTop.textContent.split("");
+      // console.log(splitTop);
+      // splitTop.splice(splitTop.length - 1, 1);
+      // screenTop.textContent = splitTop.join("");
+    }
+  }
+}
+
+function displayWaringModal() {
+  const warning = document.querySelector(".warning");
+  warning.classList.add("active");
+}
+
+function removeWarningModal() {
+  const removeWarningBtn = document.querySelector(".btn");
+  const warning = document.querySelector(".warning");
+  removeWarningBtn.addEventListener("click", (e) => {
+    warning.classList.remove("active");
+  });
 }
 
 calculator();
