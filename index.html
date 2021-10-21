@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
-        href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300;400;500;600&f+Condensed:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300;400;500;600&f+Condensed:wght@300;400;700&family=Roboto:wght@400;500;700&family=Orbitron:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -15,10 +15,9 @@
     <div class="wrapper flex">
         <div class="calculator-container flex column">
             <header class="flex column">
-                <section class="history flex">
-                    <button class="flex history-btn"><span class="material-icons-outlined history-icon">history</span></button>
-                    
-                    
+                <section class="calculator-history flex">
+                    <button class="flex open-history-btn"><span class="material-icons-outlined history-icon">history</span></button>
+                    <button class="flex close-history-btn"><span class="material-icons-outlined history-icon">close</span></button>
                 </section>
                 <section class="calculator-screen flex column">
                     <div class="warning flex">
@@ -56,8 +55,8 @@
                 </div>
 
             </section>
-            <section class="display-history-wrapper">
-                <div class="display-history"></div>
+            <section class="display-history-wrapper flex">
+                <div class="display-calculator-history "></div>
             </section>
         </div>
     </div>

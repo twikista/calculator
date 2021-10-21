@@ -161,11 +161,15 @@ function calculator() {
         //an operator is selected after value of second operand has been set
       } else if (firstOperand !== "" && secondOperand !== "") {
         solution = operate(firstOperand, operator, secondOperand);
+        addHistoryToList(screenTopRow.textContent, solution);
+        displayHistoryItems();
         arr.length = 0;
         arr.push(solution);
         firstOperand = arr[0];
+
         screenTopRow.textContent = `${solution}`;
         screenBottomRow.textContent = solution;
+
         secondOperand = "";
         operator = "";
       }
@@ -176,6 +180,8 @@ function calculator() {
     } else if (target.classList.contains("equals-key")) {
       solution = operate(firstOperand, operator, secondOperand);
       screenBottomRow.textContent = solution;
+      addHistoryToList(screenTopRow.textContent, solution);
+      displayHistoryItems();
       currentOperand = "";
       arr.length = 0;
       firstOperand = "";
@@ -264,9 +270,8 @@ function calculator() {
       screenBottom.textContent.length > 20
     ) {
       displayWaringModal();
-      removeWarningModal();
-      screenTop.textContent = "";
-      screenBottom.textContent = "";
+      removeWarningModal(resetCalculator);
+
       // const splitTop = screenTop.textContent.split("");
       // console.log(splitTop);
       // splitTop.splice(splitTop.length - 1, 1);
@@ -280,11 +285,62 @@ function displayWaringModal() {
   warning.classList.add("active");
 }
 
-function removeWarningModal() {
+function removeWarningModal(reset) {
   const removeWarningBtn = document.querySelector(".btn");
   const warning = document.querySelector(".warning");
   removeWarningBtn.addEventListener("click", (e) => {
     warning.classList.remove("active");
+    reset();
+  });
+}
+
+const openHistoryBtn = document.querySelector(".open-history-btn");
+const displayHistory = document.querySelector(".display-calculator-history");
+const closeHistoryBtn = document.querySelector(".close-history-btn");
+console.log(closeHistoryBtn);
+openHistoryBtn.addEventListener("click", (e) => {
+  openHistoryBtn.classList.add("deactivate");
+  closeHistoryBtn.classList.add("active");
+  displayHistory.classList.add("active");
+});
+
+closeHistoryBtn.addEventListener("click", (e) => {
+  openHistoryBtn.classList.remove("deactivate");
+  closeHistoryBtn.classList.remove("active");
+  displayHistory.classList.remove("active");
+});
+
+class History {
+  constructor(expression, result) {
+    this.expression = expression;
+    this.result = result;
+  }
+}
+
+const historyList = [];
+
+function addHistoryToList(expression, result) {
+  const history = new History(expression, result);
+  historyList.push(history);
+  if (historyList.length > 5) {
+    historyList.shift();
+  }
+  return historyList;
+}
+
+function displayHistoryItems() {
+  while (displayHistory.firstChild) {
+    displayHistory.removeChild(displayHistory.firstChild);
+  }
+  historyList.forEach((history) => {
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+<ul>
+<li>expression: ${history.expression}</li>
+<li>solution: ${history.result}</li>
+</ul>`;
+    displayHistory.appendChild(div);
   });
 }
 
