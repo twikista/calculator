@@ -33,9 +33,10 @@ function percent(a, b) {
   let percentage = "";
   if (b === "") {
     b = 100;
+    percentage = a / b;
+    return percentage;
   }
-  percentage = a / b;
-  console.log(b);
+  percentage = (a / b) * 100;
   return percentage;
 }
 
@@ -68,6 +69,23 @@ function operate(valueOne, operation, ValueTwo) {
     case "^":
       answer = exponent(valueOne, ValueTwo);
       break;
+  }
+
+  //function that round answers to max of 5 decimal places
+  //check number of decimal places in answer and round up to five decimal places
+  answer = answer.toString();
+  const decimal = answer.indexOf(".") + 1;
+  const decimalNumbers = answer.substring(decimal);
+  const answerLength = decimalNumbers.length;
+
+  if (answer.includes(".") && answerLength <= 4) {
+    answer = Number(answer);
+    console.log(answer);
+    return answer.toFixed(answerLength);
+  } else if (answer.includes(".") && answerLength > 4) {
+    answer = Number(answer);
+    console.log(answer);
+    return answer.toFixed(5);
   }
 
   return Number(answer);
@@ -239,6 +257,8 @@ function calculator() {
       });
     }
   }
+
+  function maxScreenLength() {}
 }
 
 calculator();

@@ -79,6 +79,7 @@ header{
     justify-content: center;
     margin-bottom: 0.8rem;
     padding-top: 0.5rem;
+
 }
 
 .screen-top-row, .screen-bottom-row{
@@ -90,7 +91,8 @@ header{
 .screen-top-row{
     font-size: 1.2rem;
     padding: 0 0.5rem 0.5rem 0.5rem;
-    color: rgba(136, 136, 136, 0.8);   
+    color: rgba(136, 136, 136, 0.8);
+     
 }
 
 .display-operator{
@@ -103,6 +105,7 @@ header{
     font-size: 2rem;
     padding: 0.75rem 0.5rem 0.75rem 0.5rem;
     color: rgb(129, 129, 129);
+    overflow: hidden;
 }
 
 /*styling for calculator keys*/
