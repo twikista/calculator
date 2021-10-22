@@ -1,26 +1,26 @@
 //functions to handle diffrent operations
 //add function
 function add(a, b) {
-  const sum = parseFloat(a) + parseFloat(b);
+  const sum = Number(a) + Number(b);
   return sum;
 }
 
 //subtract function
 function subtract(a, b) {
-  const difference = parseFloat(a) - parseFloat(b);
+  const difference = Number(a) - Number(b);
   return difference;
 }
 
 //multiply function
 function multiply(a, b) {
-  const times = parseFloat(a) * parseFloat(b);
+  const times = Number(a) * Number(b);
   return times;
 }
 
 //divide function
 function divide(a, b) {
   if (b === 0) return "Math error";
-  const division = parseFloat(a) / parseFloat(b);
+  const division = Number(a) / Number(b);
   return division;
 }
 
@@ -29,10 +29,10 @@ function percent(a, b) {
   let percentage = "";
   if (b === "") {
     b = 100;
-    percentage = a / b;
+    percentage = Number(a) / Number(b);
     return percentage;
   }
-  percentage = (a / b) * 100;
+  percentage = (Number(a) / 100) * Number(b);
   return percentage;
 }
 
@@ -79,7 +79,6 @@ function operate(valueOne, operation, ValueTwo) {
     return answer.toFixed(answerLength);
   } else if (answer.includes(".") && answerLength > 4) {
     answer = Number(answer);
-    console.log(answer);
     return answer.toFixed(5);
   }
 
@@ -271,20 +270,17 @@ function calculator() {
     ) {
       displayWaringModal();
       removeWarningModal(resetCalculator);
-
-      // const splitTop = screenTop.textContent.split("");
-      // console.log(splitTop);
-      // splitTop.splice(splitTop.length - 1, 1);
-      // screenTop.textContent = splitTop.join("");
     }
   }
 }
 
+//display warning modal when screen length is exceeded
 function displayWaringModal() {
   const warning = document.querySelector(".warning");
   warning.classList.add("active");
 }
 
+//remove warning modal on click of ok button
 function removeWarningModal(reset) {
   const removeWarningBtn = document.querySelector(".btn");
   const warning = document.querySelector(".warning");
@@ -294,22 +290,26 @@ function removeWarningModal(reset) {
   });
 }
 
+//grab history elememts from HTML
 const openHistoryBtn = document.querySelector(".open-history-btn");
 const displayHistory = document.querySelector(".display-calculator-history");
 const closeHistoryBtn = document.querySelector(".close-history-btn");
-console.log(closeHistoryBtn);
+
+//event listener to toggle history open
 openHistoryBtn.addEventListener("click", (e) => {
   openHistoryBtn.classList.add("deactivate");
   closeHistoryBtn.classList.add("active");
   displayHistory.classList.add("active");
 });
 
+//event listener to toggle history close
 closeHistoryBtn.addEventListener("click", (e) => {
   openHistoryBtn.classList.remove("deactivate");
   closeHistoryBtn.classList.remove("active");
   displayHistory.classList.remove("active");
 });
 
+//history class to create each history item
 class History {
   constructor(expression, result) {
     this.expression = expression;
@@ -319,6 +319,7 @@ class History {
 
 const historyList = [];
 
+//add history item to historyList array
 function addHistoryToList(expression, result) {
   const history = new History(expression, result);
   historyList.push(history);
@@ -328,6 +329,7 @@ function addHistoryToList(expression, result) {
   return historyList;
 }
 
+//display history item
 function displayHistoryItems() {
   while (displayHistory.firstChild) {
     displayHistory.removeChild(displayHistory.firstChild);

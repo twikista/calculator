@@ -82,7 +82,7 @@ header{
     background-color: transparent;
 }
 
-/*calculator screen section*/
+/*start of styling for calculator screen*/
 .calculator-screen{
    
     width: inherit;
@@ -121,8 +121,9 @@ header{
     color: rgb(129, 129, 129);
     overflow: hidden;
 }
+/*end of styling for calculator screen*/
 
-/*styling for calculator keys*/
+/* start of styling for calculator keys*/
 .calculator-keys{
     width: inherit;
     font-size: 1.6rem;
@@ -160,9 +161,6 @@ button:hover{
     background-color: rgb(230, 230, 230);
 }
 
-/* button .operator-key{
-    color: rgb(255, 130, 130);
-} */
 
 button:nth-child(17){
     border-bottom-left-radius: 0.6rem;
@@ -171,12 +169,9 @@ button:nth-child(17){
 button:nth-child(20){
     border-bottom-right-radius: 0.6rem; 
 }
+/*end of styling for calculator keys*/
 
-.fas{
-    color: rgb(136, 136, 136);
-    font-size: 1.4rem;
-}
-
+/*styling for history icons*/
 .material-icons-outlined.history-icon{
     color: rgb(190, 190, 190);
     font-size: 1.3rem;
@@ -187,7 +182,7 @@ button:nth-child(20){
     font-size: 1.2rem;
 }
 
-/*styling for the history section*/
+/*start of styling for the history section*/
 .display-calculator-history{
     position: absolute;
     top: 0;
@@ -199,7 +194,8 @@ button:nth-child(20){
     border-radius: 0.6rem;
     display: none;
     padding-top: 36.5px;
-    /* background-color: #f4f4f4; */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
     gap: 4px;
   }
 
@@ -223,16 +219,18 @@ button:nth-child(20){
   }
 
   .display-calculator-history div:last-child{
-      border-bottom-left-radius: 0.6rem;
-      border-bottom-right-radius:0.6rem ;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius:0.6rem ;
   }
   
 
   .display-calculator-history div ul{
-      line-height: 1.5;
+    line-height: 1.5;
     list-style: none;
 }
+/* end of styling for history section */
 
+/*start of styling for warning modal*/
 .warning{
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -266,10 +264,7 @@ button:nth-child(20){
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
-    /* height: 25px;
-    width: 25px; */
     color: rgb(109, 109, 109);
-    /* box-shadow: 0 2px 3px rgba(255, 255, 255, 0.5); */
     margin-top: 8px;
     padding: 4px 4px;
     cursor: pointer;
